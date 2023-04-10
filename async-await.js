@@ -131,3 +131,59 @@ const blogFunction = async () =>{
 }
 
 blogFunction();
+const posts= [];
+let i=1;
+const promises = async () =>{
+    function create4thPost() {
+        return new Promise((resolve) => {
+            setTimeout(()=>{
+                posts.push({title:'post 4',body:"This is post four"});
+                resolve();
+            },3000)
+        })
+    }
+    function create5thPost() {
+        return new Promise((resolve) => {
+            setTimeout(()=>{
+                posts.push({title:'post 5',body:"This is post five"});
+                resolve();
+            },6000)
+        })
+    }
+    function display(){
+        return new Promise( (resolve,reject) => {
+            if(posts.length){
+                //display all the posts
+                setTimeout (function(){
+                    let userActivity ='At '+new Date();
+                    console.log(userActivity);
+                    resolve(posts);
+                },2500)
+            }else{
+                const err = new Error ("Error: Array is Empty")
+                reject(err);
+            }
+        })
+    }
+    try{
+        let post = await display();
+    }catch(e){
+        console.log(e.message);
+    }
+    await create4thPost();
+    try{
+        let post = await display();
+        console.log(post)
+    }catch(e){
+        console.log(e.message);
+    }
+    await create5thPost();
+    try{
+        let post = await display();
+        console.log(post)
+    }catch(e){
+        console.log(e.message);
+    }
+}
+promises();
+
