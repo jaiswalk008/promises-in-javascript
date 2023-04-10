@@ -40,6 +40,6 @@ function create5thPost() {
     })
 }
 
-Promise.all([display(),create4thPost(),display(),create5thPost(),display()])
 
+Promise.all([display(),create4thPost(),display(),create5thPost(),display()])
 
